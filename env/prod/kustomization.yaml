@@ -3,3 +3,6 @@ kind: Kustomization
 
 resources:
 - ../../base
+images:
+- name: ghcr.io/morey-tech/demo-app
+  newTag: 662d07e073f798b02cebb02b26020db5b22c6516
