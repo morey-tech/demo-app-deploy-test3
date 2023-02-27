@@ -1,4 +1,4 @@
-name: Promote Image Change
+name: Promote Image Changes
 on:
   push:
     branches:
@@ -36,7 +36,7 @@ jobs:
           ENV="${{ steps.commit-metadata.outputs.ENV || 'dev' }}"
           if [ $ENV == "dev" ]; then
             echo "Promoting $IMAGE to stage"
-            cd env/stage && kustomize edit set image ghcr.io/${{ github.repository_owner }}/demo-app=$IMAGE
+            cd env/stage && kustomize edit set image $IMAGE
             git add .
             git commit -m "chore(stage): promote to $IMAGE"
             git notes append -m "image: $IMAGE"
@@ -45,9 +45,9 @@ jobs:
           elif [ $ENV == "stage" ]; then
             echo "Promoting $IMAGE to prod"
             git checkout -b auto-promotion-prod
-            cd env/prod && kustomize edit set image ghcr.io/${{ github.repository_owner }}/demo-app=$IMAGE
+            cd env/prod && kustomize edit set image $IMAGE
             git add .
             git commit -m "chore(prod): promote to $IMAGE"
             git push origin auto-promotion-prod --force
-            gh pr create --title "Promote \`prod\` to \`$IMAGE\`" --body "Promote \`prod\` to \`$IMAGE\`" --base main --head auto-promotion-prod
+            gh pr create --title "chore(prod): promote to \`$IMAGE\`" --body "Promote \`prod\` to \`$IMAGE\`" --base main --head auto-promotion-prod
           fi
