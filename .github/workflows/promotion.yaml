@@ -47,5 +47,5 @@ jobs:
             git add .
             git commit -m "chore(prod): promote to $IMAGE"
             git push origin auto-promotion-prod --force
-            gh pr create --title "Promote `prod` to `$IMAGE`" --body "Promote `prod` to `$IMAGE`" --base main --head auto-promotion-prod
+            gh pr create --title "Promote \`prod\` to \`$IMAGE\`" --body "Promote \`prod\` to \`$IMAGE\`" --base main --head auto-promotion-prod
           fi
