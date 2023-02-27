@@ -1,6 +1,6 @@
 # Demo Appication Deployment
 
-The repository contains Kubernetes deployment manifests that can be used to deploy ArgoCon 2022 workshop [demo application](https://github.com/akuity-adv-gitops-workshop/demo-app).
+The repository contains Kubernetes deployment manifests that can be used to deploy ArgoCon 2022 workshop [demo application](https://github.com/morey-tech/demo-app).
 Check the [https://github.com/argocon2022-workshop](https://github.com/argocon2022-workshop) for more information.
 
 
@@ -19,7 +19,7 @@ The repository uses [Kustomize](https://kustomize.io) to define the manifests an
 
 Please perform the following steps to start using the repository:
 
-* [Fork](https://github.com/akuity-adv-gitops-workshop/demo-app-deploy/fork) it to your own GitHub account.
+* [Fork](https://github.com/morey-tech/demo-app-deploy/fork) it to your own GitHub account.
 * Enable Github Actions for the repository:
     * Navigate to `https://github.com/<USERNAME>/demo-app-deploy/settings/secrets/actions`
     * Click `Enable local and third party Actions for this repository`
@@ -34,7 +34,7 @@ Let start from deploying the application to the `dev` environment. We need to ma
 
 ```yaml
 images:
-- name: ghcr.io/akuity-adv-gitops-workshop/demo-app
+- name: ghcr.io/morey-tech/demo-app
   newName: ghcr.io/<USERNAME>/demo-app
   newTag: <TAG>
 ```
@@ -55,7 +55,7 @@ Create the stage and prod applications using appropriate directory paths.
 ## Automating Dev Environment Upgrade using CI
 
 We've not heard from any engineers that they like to manually update the image tag in the Kustomize file. Let's automate this process using Github Actions.
-Jump to [Automating Image Updates](https://github.com/akuity-adv-gitops-workshop/demo-app#automating-image-updates) paragraph in the [demo-app](https://github.com/akuity-adv-gitops-workshop/demo-app) README.md to continue.
+Jump to [Automating Image Updates](https://github.com/morey-tech/demo-app#automating-image-updates) paragraph in the [demo-app](https://github.com/morey-tech/demo-app) README.md to continue.
 
 ## Automating Staging and Production Environments
 
@@ -99,7 +99,7 @@ jobs:
           ENV="${{ steps.commit-metadata.outputs.ENV || 'dev' }}"
           if [ $ENV == "dev" ]; then
             echo "Promoting $IMAGE to staging"
-            cd env/stage && kustomize edit set image ghcr.io/akuity-adv-gitops-workshop/demo-app=$IMAGE
+            cd env/stage && kustomize edit set image ghcr.io/morey-tech/demo-app=$IMAGE
             git add .
             git commit -m "Promote stage to $IMAGE"
             git notes append -m "image: $IMAGE"
@@ -108,7 +108,7 @@ jobs:
           elif [ $ENV == "stage" ]; then
             echo "Promoting $IMAGE to production"
             git checkout -b auto-promotion
-            cd env/prod && kustomize edit set image ghcr.io/akuity-adv-gitops-workshop/demo-app=$IMAGE
+            cd env/prod && kustomize edit set image ghcr.io/morey-tech/demo-app=$IMAGE
             git add .
             git commit -m "Promote prod to $IMAGE"
             git push origin auto-promotion --force
