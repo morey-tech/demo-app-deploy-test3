@@ -25,7 +25,7 @@ spec:
         app: demo-app
     spec:
       containers:
-      - image: ghcr.io/morey-tech/demo-app:0554205b21f25a3165c6000858be77bd4bb09dab
+      - image: ghcr.io/morey-tech/demo-app:122aa730bcfdce9413597d2e04be58b8aa7a99ff
         name: demo-app
         ports:
         - containerPort: 8080
