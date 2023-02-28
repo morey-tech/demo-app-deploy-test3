@@ -31,7 +31,7 @@ spec:
             secretKeyRef:
               key: secret-key
               name: my-secret
-        image: ghcr.io/morey-tech/demo-app:18de7fbb1a348821488a833c3db07654b92dca87
+        image: ghcr.io/morey-tech/demo-app:9bb442936cd71b3c5727e5c486c33e84fa464eab
         name: demo-app
         ports:
         - containerPort: 8080
