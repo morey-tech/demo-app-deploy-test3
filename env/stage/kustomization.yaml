@@ -5,4 +5,4 @@ resources:
 - ../../base
 images:
 - name: ghcr.io/morey-tech/demo-app
-  newTag: fc8bad8110be493cdff6806da55a355736c97847
+  newTag: 0554205b21f25a3165c6000858be77bd4bb09dab
