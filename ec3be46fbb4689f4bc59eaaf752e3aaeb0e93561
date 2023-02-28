@@ -1,1 +1,3 @@
 image: ghcr.io/morey-tech/demo-app:9bb442936cd71b3c5727e5c486c33e84fa464eab
+
+env: stage
