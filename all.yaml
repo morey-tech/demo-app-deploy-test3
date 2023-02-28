@@ -25,7 +25,13 @@ spec:
         app: demo-app
     spec:
       containers:
-      - image: ghcr.io/morey-tech/demo-app:122aa730bcfdce9413597d2e04be58b8aa7a99ff
+      - env:
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: my-secret
+        image: ghcr.io/morey-tech/demo-app:122aa730bcfdce9413597d2e04be58b8aa7a99ff
         name: demo-app
         ports:
         - containerPort: 8080
@@ -43,6 +49,6 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: fake
+    name: vault
   target:
     name: my-secret
